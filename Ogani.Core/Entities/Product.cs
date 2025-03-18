@@ -11,23 +11,3 @@ public class Product : BaseEntity
     public List<ProductCategory> ProductCategories { get; set; } = [];
     public List<ProductImage>? ProductImages { get; set; } = [];
 }
-
-public class Category : BaseEntity
-{
-    public string Name { get; set; } = null!;
-    public string ImageUrl { get; set; } = null!;
-}
-public class ProductCategory : BaseEntity
-{
-    public int CategoryId { get; set; }
-    public Category? Category { get; set; }
-    public int ProductId { get; set; }
-    public Product? Product { get; set; }
-}
-
-public  class ProductImage : BaseEntity
-{
-    public  string ImageUrl { get; set; } = null!;
-    public int ProductId { get; set; }
-    public Product? Product { get; set; }
-}
