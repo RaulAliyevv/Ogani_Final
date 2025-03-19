@@ -10,8 +10,6 @@ namespace Ogani.Business.ServiceRegistrations
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-           
-
 
             return services;
         }

@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ogani.Business\Ogani.Business.csproj" />
     <ProjectReference Include="..\Ogani.DataAccess\Ogani.DataAccess.csproj" />
   </ItemGroup>
 

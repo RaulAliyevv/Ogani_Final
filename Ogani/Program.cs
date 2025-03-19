@@ -1,10 +1,12 @@
 using Ogani.DataAccess.ServiceRegistrations;
+using Ogani.Business.ServiceRegistrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDataAccessServices(builder.Configuration);
+builder.Services.AddBllServices();
 
 var app = builder.Build();
 
