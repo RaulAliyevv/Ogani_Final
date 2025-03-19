@@ -1,17 +1,22 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Ogani.Business.Services.Abstractions;
+using Ogani.Business.Services.Implementations;
 using System.Reflection;
 
-namespace Ogani.Business.ServiceRegistrations
+namespace Ogani.Business.ServiceRegistrations;
+
+public static class BusinessLogicLayerServiceRegistration
 {
-    public static class BusinessLogicLayerServiceRegistration
+
+    public static IServiceCollection AddBllServices(this IServiceCollection services)
     {
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IProductCategoryService, ProductCategoryService>();
+        services.AddScoped<IProductImageService, ProductImageService>();
 
-        public static IServiceCollection AddBllServices(this IServiceCollection services)
-        {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddScoped<ICategoryService, CategoryService>();
 
-
-            return services;
-        }
+        return services;
     }
 }
