@@ -12,7 +12,7 @@ using Ogani.DataAccess.Context;
 namespace Ogani.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250318203457_Init")]
+    [Migration("20250322123039_Init")]
     partial class Init
     {
         /// <inheritdoc />

@@ -17,6 +17,14 @@ public static class BusinessLogicLayerServiceRegistration
 
         services.AddScoped<ICategoryService, CategoryService>();
 
+        services.AddScoped<IAccountService, AccountService>();
+
+        services.AddScoped<ICloudinaryManager, CloudinaryManager>();
+
+        services.AddScoped<IEmailService,EmailService>();
+
+        services.AddScoped<IAccountService, AccountService>();
+
         return services;
     }
 }

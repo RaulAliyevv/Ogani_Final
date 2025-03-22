@@ -1,5 +1,8 @@
 using Ogani.DataAccess.ServiceRegistrations;
 using Ogani.Business.ServiceRegistrations;
+using Microsoft.AspNetCore.Identity;
+using Ogani.Core.Entities;
+using Ogani.DataAccess.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDataAccessServices(builder.Configuration);
 builder.Services.AddBllServices();
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 8;
+    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.MaxFailedAccessAttempts = 10;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+    options.Password.RequireNonAlphanumeric = true;
 
+    //options.SignIn.RequireConfirmedEmail = true;
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
