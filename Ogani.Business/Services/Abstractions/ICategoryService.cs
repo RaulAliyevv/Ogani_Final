@@ -10,5 +10,6 @@ public interface ICategoryService : ICrudService<Category, CategoryCreateDto, Ca
     Task<bool> CreateAsync(CategoryCreateDto dto );
     Task<bool> UpdateAsync(CategoryUpdateDto dto);
     Task<bool> DeleteAsync(int id);
+     Task<CategoryUpdateDto> GetCategoryUpdate(int id);
 }
 

@@ -6,6 +6,7 @@ using Ogani.Business.Services.Implementations.Generic;
 using Ogani.Core.Entities;
 using Ogani.DataAccess.Repositories.Abstractions;
 using System.ComponentModel.DataAnnotations;
+using System.Security.AccessControl;
 
 namespace Ogani.Business.Services.Implementations;
 
@@ -66,6 +67,7 @@ public class CategoryService : CrudService<Category, CategoryCreateDto, Category
 
         category.Name = dto.Name;
          _categoryRepository.Update(category);
+       await _categoryRepository.SaveChangesAsync();
         return true;
     }
 
@@ -77,5 +79,22 @@ public class CategoryService : CrudService<Category, CategoryCreateDto, Category
 
         await _categoryRepository.Delete(category);
         return true;
+    }
+
+    public async Task<CategoryUpdateDto> GetCategoryUpdate(int id)
+    {
+        var category = await _categoryRepository.GetAsync(id);
+        if(category is null)
+        {
+            throw new NotFoundException();
+        }
+
+        var model = new CategoryUpdateDto
+        {
+            Name = category.Name,
+            ImageUrl = category.ImageUrl
+        };
+
+        return model;
     }
 }

@@ -128,7 +128,7 @@ internal class Repository<T> : IRepository<T> where T : BaseEntity
         return await _context.SaveChangesAsync();
     }
 
-    public void Update(T entity)
+    public  void Update(T entity)
     {
         _table.Update(entity);
     }

@@ -1,0 +1,35 @@
+﻿@model CategoryUpdateDto
+<form asp-action="Update" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <h5 class="card-header"> Category update</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon11"></span>
+                        <input asp-for="Name"
+                               type="text"
+                               class="form-control"
+                               placeholder="Name"
+                               aria-label="Username"
+                               aria-describedby="basic-addon11" />
+                    </div>
+
+                    <img src="@Model.ImageUrl" width="100px" alt="Alternate Text" /> 
+
+
+
+
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                        <input asp-for="ImageFile" type="file" class="form-control" id="inputGroupFile01" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">update</button>
+</form>

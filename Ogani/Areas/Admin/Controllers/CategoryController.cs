@@ -48,6 +48,25 @@ namespace Ogani.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Update(int id)
+        {
+            var category = await _categoryService.GetCategoryUpdate(id);
+            return View(category);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Update(CategoryUpdateDto dto)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(dto);
+            }
+            await _categoryService.UpdateAsync(dto);
+
+            return RedirectToAction("Index");
+        }
 
     }
 }

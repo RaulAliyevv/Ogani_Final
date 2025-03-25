@@ -6,6 +6,7 @@ namespace Ogani.Business.Dtos.CategoryDtos;
 public class CategoryUpdateDto : IDto
 {
     public int Id { get; set; }
-    public required string Name { get; set; }
+    public  string? Name { get; set; }
     public IFormFile? ImageFile { get; set; }
+    public string? ImageUrl { get; set; }
 }
