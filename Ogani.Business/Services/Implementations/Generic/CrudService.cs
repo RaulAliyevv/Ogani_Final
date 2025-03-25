@@ -43,7 +43,7 @@ where TDto : IDto
 
     public async Task<List<TDto>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, bool enableTracking = true)
     {
-        var entitiesQuery = _repository.GetAll(include, enableTracking);
+        var entitiesQuery = _repository.GetAll(include);
 
         if (predicate != null)
             entitiesQuery = entitiesQuery.Where(predicate);
