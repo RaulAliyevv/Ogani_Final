@@ -35,7 +35,18 @@ namespace Ogani.Areas.Admin.Controllers
             }
             var isCreated = await _categoryService.CreateAsync(dto);
 
-            return View(dto);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var isDeleted = await _categoryService.DeleteAsync(id);
+            if (!isDeleted)
+            {
+                ModelState.AddModelError("", "Category dont delete");
+            }
+
+            return RedirectToAction("Index");
         }
 
     }

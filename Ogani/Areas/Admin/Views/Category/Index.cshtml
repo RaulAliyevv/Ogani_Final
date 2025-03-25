@@ -20,11 +20,11 @@
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@category.Id</strong></td>
                         <td>@category.Name</td>
                         <td>
-                           <img src="~/img/categories/@category.ImageUrl" width="100px" alt="Alternate Text" />
+                           <img src="@category.ImageUrl" width="100px" alt="Alternate Text" />
                         </td>
-                        <td><button class="badge bg-label-primary me-1">Update</button></td>
+                        <td><button asp-controller="Category" asp-action="Update" class="badge bg-label-primary me-1">Update</button></td>
                         <td>
-                            <button class="badge bg-label-primary me-1">Delete</button>
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="badge bg-label-primary me-1">Delete</a>
                         </td>
                     </tr>
 

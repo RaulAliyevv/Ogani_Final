@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ogani.DataAccess.Context;
+using Ogani.DataAccess.Interceptors;
 using Ogani.DataAccess.Repositories.Abstractions;
 using Ogani.DataAccess.Repositories.Abstractions.Generic;
 using Ogani.DataAccess.Repositories.Implementations;
@@ -28,6 +29,9 @@ namespace Ogani.DataAccess.ServiceRegistrations
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddScoped<IProductImageRepository, ProductImageRepository>();
+
+            services.AddScoped<BaseAuditableInterceptor>();
+
         }
     }
 }

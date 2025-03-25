@@ -8,5 +8,7 @@ namespace Ogani.Business.Services.Abstractions;
 public interface ICategoryService : ICrudService<Category, CategoryCreateDto, CategoryUpdateDto, CategoryDto>
 {
     Task<bool> CreateAsync(CategoryCreateDto dto );
+    Task<bool> UpdateAsync(CategoryUpdateDto dto);
+    Task<bool> DeleteAsync(int id);
 }
 

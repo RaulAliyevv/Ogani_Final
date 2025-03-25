@@ -2,7 +2,7 @@
 
 namespace Ogani.Core.Entities;
 
-public class Product : BaseEntity
+public class Product : BaseAuditableEntity
 {
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;

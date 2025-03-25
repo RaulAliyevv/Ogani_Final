@@ -1,5 +1,5 @@
 ﻿@model CategoryCreateDto
-<form asp-action="Create" method="post">
+<form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="row">
         <!-- Basic -->
         <div class="col-md-6">
@@ -22,7 +22,7 @@
 
                     <div class="input-group">
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                        <input asp-for="ImageFile" type="file" class="form-control" id="inputGroupFile01" enctype="multipart/form-data" />
+                        <input asp-for="ImageFile" type="file" class="form-control" id="inputGroupFile01"  />
                     </div>
                 </div>
             </div>

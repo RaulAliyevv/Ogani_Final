@@ -2,8 +2,8 @@
 
     namespace Ogani.Core.Entities;
 
-    public class ProductCategory : BaseEntity
-    {
+    public class ProductCategory : BaseAuditableEntity
+{
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
         public int ProductId { get; set; }

@@ -1,18 +1,19 @@
 ﻿using AutoMapper;
 using Ogani.Business.Dtos.CategoryDtos;
+using Ogani.Business.Exceptions;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.Services.Implementations.Generic;
 using Ogani.Core.Entities;
 using Ogani.DataAccess.Repositories.Abstractions;
-using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ogani.Business.Services.Implementations;
 
-public class CategoryService : CrudService<Category, CategoryCreateDto,CategoryUpdateDto, CategoryDto>, ICategoryService
+public class CategoryService : CrudService<Category, CategoryCreateDto, CategoryUpdateDto, CategoryDto>, ICategoryService
 {
-
     private readonly ICloudinaryManager _cloudinaryManager;
     private readonly ICategoryRepository _categoryRepository;
+
     public CategoryService(ICategoryRepository repository, IMapper mapper, ICloudinaryManager cloudinaryManager) : base(repository, mapper)
     {
         _cloudinaryManager = cloudinaryManager;
@@ -21,16 +22,17 @@ public class CategoryService : CrudService<Category, CategoryCreateDto,CategoryU
 
     public async Task<bool> CreateAsync(CategoryCreateDto dto)
     {
-        if(dto is null)
-        {
-            return false;
-        }
-    
+        if (dto == null) return false;
+
+        if (string.IsNullOrWhiteSpace(dto.Name))
+            throw new ValidationException("Kategoriya adı boş ola bilməz!");
+
+        if (dto.ImageFile == null || dto.ImageFile.Length == 0)
+            throw new ValidationException("Şəkil mütləqdir!");
+
         var img = await _cloudinaryManager.FileCreateAsync(dto.ImageFile);
-        if(img is null)
-        {
-            return false;
-        }
+        if (img == null)
+            throw new Exception("Şəkil yüklənmədi!");
 
         var model = new Category
         {
@@ -39,6 +41,41 @@ public class CategoryService : CrudService<Category, CategoryCreateDto,CategoryU
         };
 
         await _categoryRepository.CreateAsync(model);
+        return true;
+    }
+
+    public async Task<bool> UpdateAsync(CategoryUpdateDto dto)
+    {
+        if (dto == null) return false;
+
+        var category = await _categoryRepository.GetAsync(dto.Id);
+        if (category == null)
+            throw new NotFoundException("Not Found Category Name");
+
+        if (string.IsNullOrWhiteSpace(dto.Name))
+            throw new NotFoundException("Name is null");
+
+        if (dto.ImageFile != null && dto.ImageFile.Length > 0)
+        {
+            var img = await _cloudinaryManager.FileCreateAsync(dto.ImageFile);
+            if (img == null)
+                throw new NotFoundException("Not Found Image");
+
+            category.ImageUrl = img;
+        }
+
+        category.Name = dto.Name;
+         _categoryRepository.Update(category);
+        return true;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var category = await _categoryRepository.GetAsync(id);
+        if (category == null)
+            throw new NotFoundException("Not Found Category");
+
+        await _categoryRepository.Delete(category);
         return true;
     }
 }

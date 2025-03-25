@@ -5,6 +5,6 @@ namespace Ogani.Business.Dtos.CategoryDtos;
 
 public class CategoryCreateDto : IDto
 {
-    public required string Name { get; set; }
-    public required IFormFile ImageFile { get; set; }
+    public string Name { get; set; } = null!;
+    public IFormFile ImageFile { get; set; } = null!;
 }

@@ -2,7 +2,7 @@
 
 namespace Ogani.Core.Entities;
 
-public  class ProductImage : BaseEntity
+public  class ProductImage : BaseAuditableEntity
 {
     public  string ImageUrl { get; set; } = null!;
     public int ProductId { get; set; }
