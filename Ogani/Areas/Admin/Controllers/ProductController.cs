@@ -1,23 +1,57 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Ogani.Business.Dtos.ProductDtos;
 using Ogani.Business.Services.Abstractions;
 
-namespace Ogani.Areas.Admin.Controllers
+namespace Ogani.Areas.Admin.Controllers;
+
+[Area("Admin")]
+
+public class ProductController : Controller
 {
-    [Area("Admin")]
+    private readonly IProductService _productService;
 
-    public class ProductController : Controller
+    public ProductController(IProductService productService)
     {
-        private readonly IProductService _productService;
+        _productService = productService;
+    }
 
-        public ProductController(IProductService productService)
+    public async Task<IActionResult> Index()
+    {
+        var products = await _productService.GetAllAsync();
+        return View(products);
+    }
+    public async Task<IActionResult> Create()
+    {
+        var dto = await _productService.GetCreatedProductDto();
+        return View(dto);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Create(ProductCreateDto dto)
+    {
+        var result = await _productService.ProductCreate(dto);
+
+        if (!result.Success)
         {
-            _productService = productService;
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);  
+            }
+            var categories = await _productService.GetCreatedProductDto();
+            dto.Categories = categories.Categories;
+            return View(dto); 
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var products = await _productService.GetAllAsync();
-            return View(products);
-        }
+        return RedirectToAction("Index");  
+    }
+
+
+    public async Task<IActionResult> Update()
+    {
+        return View();
+    }
+
+    public async Task<IActionResult> Update(ProductUpdateDto dto)
+    {
+        return View(dto);
     }
 }

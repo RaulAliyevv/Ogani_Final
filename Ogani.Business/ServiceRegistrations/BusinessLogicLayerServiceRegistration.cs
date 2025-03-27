@@ -12,7 +12,7 @@ public static class BusinessLogicLayerServiceRegistration
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddScoped<IProductService, ProductService>();
-        services.AddScoped<IProductCategoryService, ProductCategoryService>();
+        //services.AddScoped<IProductCategoryService, ProductCategoryService>();
         services.AddScoped<IProductImageService, ProductImageService>();
 
         services.AddScoped<ICategoryService, CategoryService>();

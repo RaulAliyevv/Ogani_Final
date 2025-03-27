@@ -1,0 +1,70 @@
+﻿@model ProductCreateDto
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <h5 class="card-header"> Product create</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon11"></span>
+                        <input asp-for="Name"
+                               type="text"
+                               class="form-control"
+                               placeholder="Name"
+                               aria-label="Username"
+                               aria-describedby="basic-addon11" />
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon11"></span>
+                        <input asp-for="Description"
+                               type="text"
+                               class="form-control"
+                               placeholder="Description"
+                               aria-label="Description"
+                               aria-describedby="basic-addon11" />
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="html5-number-input" class="col-md-2 col-form-label">Price</label>
+                        <div class="col-md-10">
+                            <input asp-for="Price" class="form-control" type="number" id="html5-number-input" step="0.01" />
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="input-group">
+                        <label class="input-group-text" for="categorySelect">Category</label>
+                        <select asp-for="CategoryId" class="form-control" id="categorySelect">
+                            <option value="">Select Category</option>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.Value">@category.Text</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                        <input asp-for="MainImageUrl" type="file" class="form-control" id="inputGroupFile01" />
+                    </div>
+
+
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                        <input asp-for="ProductImages" type="file" class="form-control" id="inputGroupFile01" multiple />
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

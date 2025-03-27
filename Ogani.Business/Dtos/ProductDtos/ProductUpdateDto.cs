@@ -6,11 +6,16 @@ namespace Ogani.Business.Dtos.ProductDtos;
 
 public class ProductUpdateDto : IDto
 {
+    public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public decimal Price { get; set; }
-    public string? MainImageUrl { get; set; }
+    public string? ImageMain { get; set; }
+    public IFormFile? MainImageUrl { get; set; }
 
     public List<IFormFile> ProductImages { get; set; } = [];
-    public List<SelectListItem> ProductCategories { get; set; } = [];
+
+    public int CategoryId { get; set; } 
+
+    public List<SelectListItem> Categories { get; set; } = new List<SelectListItem>();
 }

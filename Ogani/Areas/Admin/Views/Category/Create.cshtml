@@ -1,5 +1,7 @@
 ﻿@model CategoryCreateDto
 <form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+
     <div class="row">
         <!-- Basic -->
         <div class="col-md-6">

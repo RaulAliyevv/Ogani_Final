@@ -8,6 +8,7 @@ public class Product : BaseAuditableEntity
     public string Description { get; set; } = null!;
     public decimal Price { get; set; }
     public string IsMainPicture { get; set; } = null!;
-    public List<ProductCategory> ProductCategories { get; set; } = [];
+    public int CategoryId { get; set; }
+    public Category? Category { get; set; }
     public List<ProductImage>? ProductImages { get; set; } = [];
 }
