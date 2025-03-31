@@ -66,8 +66,8 @@ public class CategoryService : CrudService<Category, CategoryCreateDto, Category
         }
 
         category.Name = dto.Name;
-         _categoryRepository.Update(category);
-       await _categoryRepository.SaveChangesAsync();
+        _categoryRepository.Update(category);
+        await _categoryRepository.SaveChangesAsync();
         return true;
     }
 
@@ -84,9 +84,9 @@ public class CategoryService : CrudService<Category, CategoryCreateDto, Category
     public async Task<CategoryUpdateDto> GetCategoryUpdate(int id)
     {
         var category = await _categoryRepository.GetAsync(id);
-        if(category is null)
+        if (category is null)
         {
-            throw new NotFoundException();
+            throw new NotFoundException("category is null ");
         }
 
         var model = new CategoryUpdateDto

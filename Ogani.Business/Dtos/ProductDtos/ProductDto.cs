@@ -11,7 +11,6 @@ public class ProductDto : IDto
     public string Description { get; set; } = null!;
     public decimal Price { get; set; }
     public string? IsMainPicture { get; set; }
-
+    public string? CategoryName { get; set; }
     public List<ProductImageDto>? ProductImages { get; set; }
-    public List<ProductCategoryDto>? ProductCategories { get; set; }
 }

@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Ogani.Business.Dtos.ProductDtos;
+using Ogani.Business.Dtos.ProductImageDtos;
+using Ogani.Business.Exceptions;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.Services.Implementations.Generic;
 using Ogani.Core.Entities;
 using Ogani.DataAccess.Repositories.Abstractions;
+using System.Web.Mvc;
 namespace Ogani.Business.Services.Implementations;
 
 public class ProductService : CrudService<Product, ProductCreateDto, ProductUpdateDto, ProductDto>, IProductService
@@ -28,7 +30,7 @@ public class ProductService : CrudService<Product, ProductCreateDto, ProductUpda
 
         var model = new ProductCreateDto
         {
-            Categories = categories.Select(c => new SelectListItem
+            Categories = categories.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
             {
                 Value = c.Id.ToString(),
                 Text = c.Name
@@ -39,6 +41,37 @@ public class ProductService : CrudService<Product, ProductCreateDto, ProductUpda
     }
 
 
+    public async Task<ProductUpdateDto> GetUpdateProduct(int id)
+    {
+        var product = await _productRepository.GetAsync(id);
+        if (product == null)
+            throw new NotFoundException("Product not found");
+
+        var images = _productImageRepository.GetAll().Where(x=>x.ProductId == id).ToList();
+        var categoies = await _categoryService.GetAsync(x=> x.Id == product.CategoryId );
+        return new ProductUpdateDto
+        {
+            Name = product.Name,
+            Price = product.Price,
+            Description = product.Description,
+            ImageMain = product.IsMainPicture,
+            Categories = new List<SelectListItem>
+    {
+        new SelectListItem { Value = categoies.Id.ToString(), Text = categoies.Name }
+    },
+            imgUrl = images.Select(x => new ProductImageDto { ImageUrl = x.ImageUrl }).ToList()
+        };
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var product = await _productRepository.GetAsync(id);
+        if (product == null)
+            throw new NotFoundException("Not Found Product");
+
+        await _productRepository.Delete(product);
+        return true;
+    }
 
     public async Task<(bool Success, List<string> Errors)> ProductCreate(ProductCreateDto dto)
     {
@@ -161,7 +194,26 @@ public class ProductService : CrudService<Product, ProductCreateDto, ProductUpda
             return true;
         }
 
-    
+    public async Task<ProductDto> GetProduct(int id)
+    {
+        var product = await _productRepository.GetAsync(id);
+        if (product == null)
+            throw new NotFoundException("Product not found");
+
+        var images = _productImageRepository.GetAll().Where(x => x.ProductId == id).ToList();
+        var categoies = await _categoryService.GetAsync(x => x.Id == product.CategoryId);
+
+        return new ProductDto
+        {
+            Name = product.Name,
+            Description = product.Description,
+            Price = product.Price,
+            CategoryName = categoies.Name,
+            IsMainPicture = product.IsMainPicture,
+            ProductImages = images.Select(x => new ProductImageDto { ImageUrl = x.ImageUrl }).ToList()
+        };
+
+    }
 }
 
 

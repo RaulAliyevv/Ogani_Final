@@ -5,7 +5,7 @@
         <!-- Basic -->
         <div class="col-md-6">
             <div class="card mb-4">
-                <h5 class="card-header"> Product create</h5>
+                <h5 class="card-header"> Product Update</h5>
                 <div class="card-body demo-vertical-spacing demo-only-element">
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon11"></span>
@@ -47,12 +47,16 @@
                         </select>
                     </div>
 
-
+                    <img src="@Model.ImageMain" width="150px" />
                     <div class="input-group">
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>
                         <input asp-for="MainImageUrl" type="file" class="form-control" id="inputGroupFile01" />
                     </div>
 
+                    @foreach (var img in Model.imgUrl)
+                    {
+                        <img src="@img.ImageUrl" width=" 150px" />
+                    }
 
                     <div class="input-group">
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>

@@ -30,6 +30,7 @@ public class AppDbContext : IdentityDbContext<AppUser>
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Category>().HasQueryFilter(c => !c.IsDeleted);
+        modelBuilder.Entity<Product>().HasQueryFilter(c => !c.IsDeleted);
     }
 
 }

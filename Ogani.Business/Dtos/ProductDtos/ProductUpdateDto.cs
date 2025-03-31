@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Ogani.Business.Dtos.Base;
+using Ogani.Business.Dtos.ProductImageDtos;
 using System.Web.Mvc;
 
 namespace Ogani.Business.Dtos.ProductDtos;
@@ -13,6 +14,7 @@ public class ProductUpdateDto : IDto
     public string? ImageMain { get; set; }
     public IFormFile? MainImageUrl { get; set; }
 
+    public List<ProductImageDto> imgUrl { get; set; } = [];
     public List<IFormFile> ProductImages { get; set; } = [];
 
     public int CategoryId { get; set; } 

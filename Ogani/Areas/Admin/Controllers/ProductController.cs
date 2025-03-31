@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Ogani.Business.Dtos.ProductDtos;
 using Ogani.Business.Services.Abstractions;
+using Ogani.Business.Services.Implementations;
 
 namespace Ogani.Areas.Admin.Controllers;
 
@@ -45,13 +46,31 @@ public class ProductController : Controller
     }
 
 
-    public async Task<IActionResult> Update()
+    public async Task<IActionResult> Update(int id)
     {
-        return View();
+        var dto = await _productService.GetUpdateProduct(id);
+        return View(dto);
     }
-
+    [HttpPost]
     public async Task<IActionResult> Update(ProductUpdateDto dto)
     {
         return View(dto);
+    }
+
+    public async Task<IActionResult> Detail(int id)
+    {
+        var product = await _productService.GetProduct(id);
+        return View(product);
+    }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var isDeleted = await _productService.DeleteAsync(id);
+        if (!isDeleted)
+        {
+            ModelState.AddModelError("", "Product dont delete");
+        }
+
+        return RedirectToAction("Index");
     }
 }
