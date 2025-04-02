@@ -34,16 +34,12 @@
                         </div>
                     </div>
 
-                    
 
-                    <div class="input-group">
-                        <label class="input-group-text" for="categorySelect">Category</label>
-                        <select asp-for="CategoryId" class="form-control" id="categorySelect">
-                            <option value="">Select Category</option>
-                            @foreach (var category in Model.Categories)
-                            {
-                                <option value="@category.Value">@category.Text</option>
-                            }
+
+                    <div class="form-group">
+                        <label asp-for="CategoryId"></label>
+                        <select asp-for="CategoryId" asp-items="Model.Categories" class="form-control">
+                            <option value="">Kateqoriya seçin</option>
                         </select>
                     </div>
 

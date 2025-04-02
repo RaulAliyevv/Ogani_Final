@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.Services.Implementations;
+using Ogani.Business.UIService.Abstracts;
+using Ogani.Business.UIService.Implementations;
 using System.Reflection;
 
 namespace Ogani.Business.ServiceRegistrations;
@@ -24,6 +26,8 @@ public static class BusinessLogicLayerServiceRegistration
         services.AddScoped<IEmailService,EmailService>();
 
         services.AddScoped<IAccountService, AccountService>();
+
+        services.AddScoped<IHomeService, HomeService>();
 
         return services;
     }

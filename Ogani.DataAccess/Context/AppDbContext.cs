@@ -33,4 +33,5 @@ public class AppDbContext : IdentityDbContext<AppUser>
         modelBuilder.Entity<Product>().HasQueryFilter(c => !c.IsDeleted);
     }
 
+
 }

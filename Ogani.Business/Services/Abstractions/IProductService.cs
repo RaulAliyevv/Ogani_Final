@@ -11,6 +11,8 @@ public interface IProductService : ICrudService<Product, ProductCreateDto, Produ
     Task<(bool Success, List<string> Errors)> ProductCreate(ProductCreateDto dto);
     Task<bool> DeleteAsync(int id);
     Task<ProductDto> GetProduct(int id);
+    Task<ProductUpdateDto> GetProductUpdateDto(int productId);
+    Task<(bool Success, List<string> Errors)> UpdateProductAsync(ProductUpdateDto dto);
 }
 
 

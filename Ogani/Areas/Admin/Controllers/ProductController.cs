@@ -48,13 +48,29 @@ public class ProductController : Controller
 
     public async Task<IActionResult> Update(int id)
     {
-        var dto = await _productService.GetUpdateProduct(id);
+        var dto = await _productService.GetProductUpdateDto(id);
         return View(dto);
     }
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(ProductUpdateDto dto)
     {
-        return View(dto);
+        if (!ModelState.IsValid)
+        {
+            return View(dto);
+        }
+
+        var result = await _productService.UpdateProductAsync(dto);
+        if (!result.Success)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+            return View(dto);
+        }
+
+        return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> Detail(int id)

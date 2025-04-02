@@ -1,4 +1,5 @@
 ﻿using Ogani.Business.Dtos.Base;
+using Ogani.Business.Dtos.CategoryDtos;
 using Ogani.Business.Dtos.ProductCategoryDtos;
 using Ogani.Business.Dtos.ProductImageDtos;
 
@@ -12,5 +13,7 @@ public class ProductDto : IDto
     public decimal Price { get; set; }
     public string? IsMainPicture { get; set; }
     public string? CategoryName { get; set; }
+    public List<CategoryDto> Categories { get; set; } = new();
+
     public List<ProductImageDto>? ProductImages { get; set; }
 }

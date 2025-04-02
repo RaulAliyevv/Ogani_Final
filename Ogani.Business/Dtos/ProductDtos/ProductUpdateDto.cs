@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Ogani.Business.Dtos.Base;
 using Ogani.Business.Dtos.ProductImageDtos;
-using System.Web.Mvc;
 
 namespace Ogani.Business.Dtos.ProductDtos;
 
