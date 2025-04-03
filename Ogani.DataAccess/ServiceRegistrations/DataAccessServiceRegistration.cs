@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ogani.DataAccess.Context;
+using Ogani.DataAccess.DataInitalizers;
 using Ogani.DataAccess.Interceptors;
 using Ogani.DataAccess.Repositories.Abstractions;
 using Ogani.DataAccess.Repositories.Abstractions.Generic;
@@ -16,6 +17,7 @@ namespace Ogani.DataAccess.ServiceRegistrations
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")));
 
+            services.AddScoped<DbContextInitalizer>();
 
             AddRepositories(services);
 
@@ -28,6 +30,7 @@ namespace Ogani.DataAccess.ServiceRegistrations
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductImageRepository, ProductImageRepository>();
+            services.AddScoped<ISliderRepository, SliderRepository>();
 
             services.AddScoped<BaseAuditableInterceptor>();
 

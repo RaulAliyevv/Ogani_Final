@@ -12,4 +12,3 @@ public interface ICategoryService : ICrudService<Category, CategoryCreateDto, Ca
     Task<bool> DeleteAsync(int id);
      Task<CategoryUpdateDto> GetCategoryUpdate(int id);
 }
-

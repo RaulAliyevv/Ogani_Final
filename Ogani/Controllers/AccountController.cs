@@ -147,8 +147,4 @@ public class AccountController : Controller
         return RedirectToAction("Login");
     }
 
-
-   
-  
-
 }

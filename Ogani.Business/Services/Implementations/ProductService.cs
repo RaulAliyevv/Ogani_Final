@@ -30,7 +30,7 @@ public class ProductService : CrudService<Product, ProductCreateDto, ProductUpda
 
         var model = new ProductCreateDto
         {
-            Categories = categories.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+            Categories = categories.Select(c => new SelectListItem
             {
                 Value = c.Id.ToString(),
                 Text = c.Name

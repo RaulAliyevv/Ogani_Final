@@ -1,13 +1,18 @@
 ﻿@using Ogani.Business.Dtos.HomeDtos
 @model HomeDto
-<div class="hero__item set-bg" data-setbg="https://images.app.goo.gl/82EdCQ7NQojRFs1R7">
-    <div class="hero__text">
-        <span>FRUIT FRESH</span>
-        <h2>Vegetable <br />100% Organic</h2>
-        <p>Free Pickup and Delivery Available</p>
-        <a href="#" class="primary-btn">SHOP NOW</a>
+
+@foreach (var slider in Model.SliderDto)
+{
+    <div class="hero__item set-bg" data-setbg="@slider.ImgUrl">
+        <div class="hero__text">
+            <span>@slider.GreenWrite</span>
+            <h2> <br />@slider.BoldWrite</h2>
+            <p>@slider.LightWrite</p>
+            <a href="#" class="primary-btn">@slider.ButtonWrite</a>
+        </div>
     </div>
-</div>
+}
+
                 </div>
             </div>
         </div>
@@ -57,22 +62,27 @@
             {
                 var categoryClasses = product?.Categories?.Select(c => c.Name.ToLower().Replace(" ", "-")).ToList() ?? [];
                 var categoryClass = string.Join(" ", categoryClasses);
+               
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix @categoryClass">
 
-                <div class="col-lg-3 col-md-4 col-sm-6 mix @categoryClass">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="@product?.IsMainPicture">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a asp-action="AddToBasket" asp-route-id="@product!.Id"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">@product?.Name</a></h6>
-                            <h5>@product?.Price</h5>
+                        <div class="featured__item">
+                     
+                            <div class="featured__item__pic set-bg" data-setbg="@product?.IsMainPicture">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a asp-action="AddToBasket" asp-route-id="@product!.Id"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                            <h6><a asp-controller="Home" asp-action="Detail" asp-route-id="@product!.Id">@product?.Name</a></h6>
+                                <h5>@product?.Price</h5>
+                            </div>
+                        
                         </div>
                     </div>
-                </div>
+              
             }
         </div>
     </div>

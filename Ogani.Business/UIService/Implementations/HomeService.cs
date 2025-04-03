@@ -3,8 +3,10 @@ using Ogani.Business.Dtos.CategoryDtos;
 using Ogani.Business.Dtos.HomeDtos;
 using Ogani.Business.Dtos.ProductDtos;
 using Ogani.Business.Dtos.ProductImageDtos;
+using Ogani.Business.Exceptions;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.UIService.Abstracts;
+using System.Data;
 
 namespace Ogani.Business.UIService.Implementations;
 
@@ -12,16 +14,19 @@ internal class HomeService : IHomeService
 {
     private readonly IProductService _productService;
     private readonly ICategoryService _categoryService;
+    private readonly ISliderService _sliderService;
 
 
-    public HomeService(IProductService productService, ICategoryService categoryService)
+    public HomeService(IProductService productService, ICategoryService categoryService, ISliderService sliderService)
     {
         _productService = productService;
         _categoryService = categoryService;
+        _sliderService = sliderService;
     }
 
     public async Task<HomeDto> GetHomeViewModelAsync()
     {
+        var slider = await _sliderService.GetAllAsync();
         var categories = await _categoryService.GetAllAsync();
         var products = await _productService.GetAllAsync(include: x => x
             .Include(y => y.ProductImages!)
@@ -51,8 +56,37 @@ internal class HomeService : IHomeService
         return new HomeDto
         {
             Categories = categories,
-            Products = productDtos
+            Products = productDtos,
+            SliderDto =slider
         };
+    }
+
+
+
+    public async Task<DetailDto> GetDetail(int id)
+    {
+        var slider = await _sliderService.GetAllAsync();
+
+        var product = await _productService.GetAsync(x=>x.Id==id ,include : x=>x.Include(x=>x.Category) .Include(c=>c.ProductImages));
+
+        if( product is null) throw new NotFoundException();
+
+
+
+        var relatedProducts = await _productService.GetAllAsync(x =>
+          x.CategoryId == product.CategoryId && x.Id != id);
+
+
+
+
+        var model = new DetailDto
+        {
+            Product = product,
+            SliderDto=slider,
+            RelatedProducts = relatedProducts
+        };
+
+        return model;
     }
 
 }

@@ -3,12 +3,11 @@ using Ogani.DataAccess.Context;
 using Ogani.DataAccess.Repositories.Abstractions;
 using Ogani.DataAccess.Repositories.Implementations.Generic;
 
-namespace Ogani.DataAccess.Repositories.Implementations
+namespace Ogani.DataAccess.Repositories.Implementations;
+
+internal class CategoryRepository : Repository<Category>, ICategoryRepository
 {
-    internal class CategoryRepository : Repository<Category>, ICategoryRepository
+    public CategoryRepository(AppDbContext context) : base(context)
     {
-        public CategoryRepository(AppDbContext context) : base(context)
-        {
-        }
     }
 }

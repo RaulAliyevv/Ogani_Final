@@ -20,6 +20,12 @@ namespace Ogani.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Detail(int id)
+        {
+            var model = await _homeService.GetDetail(id);
+            return View(model);
+        }
+
        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,0 +1,79 @@
+﻿@using Ogani.Business.Dtos.SliderDtos
+@model UpdateSliderDto
+
+<form asp-action="Update" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <h5 class="card-header">Slider Update</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+
+                    <!-- Slider Adı -->
+                    <div class="input-group">
+                        <span class="input-group-text">📌</span>
+                        <input asp-for="Name"
+                               type="text"
+                               class="form-control"
+                               placeholder="Slider Name"
+                               aria-label="Slider Name" />
+                    </div>
+
+                    <!-- Mövcud Şəkil -->
+                    <img src="@Model.ImgUrlPicture" width="150px" alt="Slider Image" class="mt-2" />
+
+                    <!-- Yeni Şəkil Yükləmə -->
+                    <div class="input-group mt-3">
+                        <label class="input-group-text" for="inputGroupFile01">Upload New Image</label>
+                        <input asp-for="ImgUrl" type="file" class="form-control" id="inputGroupFile01" />
+                    </div>
+
+                    <!-- Green Write -->
+                    <div class="input-group mt-3">
+                        <span class="input-group-text">🟢</span>
+                        <input asp-for="GreenWrite"
+                               type="text"
+                               class="form-control"
+                               placeholder="Green Write"
+                               aria-label="Green Write" />
+                    </div>
+
+                    <!-- Bold Write -->
+                    <div class="input-group mt-3">
+                        <span class="input-group-text">🔠</span>
+                        <input asp-for="BoldWrite"
+                               type="text"
+                               class="form-control"
+                               placeholder="Bold Write"
+                               aria-label="Bold Write" />
+                    </div>
+
+                    <!-- Light Write -->
+                    <div class="input-group mt-3">
+                        <span class="input-group-text">🔤</span>
+                        <input asp-for="LightWrite"
+                               type="text"
+                               class="form-control"
+                               placeholder="Light Write"
+                               aria-label="Light Write" />
+                    </div>
+
+                    <!-- Button Write -->
+                    <div class="input-group mt-3">
+                        <span class="input-group-text">🔘</span>
+                        <input asp-for="ButtonWrite"
+                               type="text"
+                               class="form-control"
+                               placeholder="Button Write"
+                               aria-label="Button Write" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

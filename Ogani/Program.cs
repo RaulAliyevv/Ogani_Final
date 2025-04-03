@@ -3,6 +3,7 @@ using Ogani.Business.ServiceRegistrations;
 using Microsoft.AspNetCore.Identity;
 using Ogani.Core.Entities;
 using Ogani.DataAccess.Context;
+using Ogani.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+await app.InitDatabaseAsync();
 
 app.UseAuthorization();
 app.MapControllerRoute(

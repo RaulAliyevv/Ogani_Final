@@ -13,6 +13,7 @@ public class ProductDto : IDto
     public decimal Price { get; set; }
     public string? IsMainPicture { get; set; }
     public string? CategoryName { get; set; }
+    public int CategoryId { get; set; }
     public List<CategoryDto> Categories { get; set; } = new();
 
     public List<ProductImageDto>? ProductImages { get; set; }
