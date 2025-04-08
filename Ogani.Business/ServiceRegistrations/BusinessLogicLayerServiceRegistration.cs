@@ -29,6 +29,8 @@ public static class BusinessLogicLayerServiceRegistration
 
         services.AddScoped<IHomeService, HomeService>();
         services.AddScoped<ISliderService, SliderService>();
+        services.AddScoped<ISubscribeService, SubscribeService>();
+        services.AddScoped<IBasketService, BasketService>();
 
         return services;
     }

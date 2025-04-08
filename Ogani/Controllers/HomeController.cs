@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Ogani.Business.Dtos.Subscribes;
 using Ogani.Business.UIService.Abstracts;
 using Ogani.Models;
 using System.Diagnostics;
@@ -26,7 +27,14 @@ namespace Ogani.Controllers
             return View(model);
         }
 
-       
+        public async Task<IActionResult> Subcribe(SubscribeCreateDto dto)
+        {
+            var succsuss = await _homeService.CreateSubcribeAsync(dto);
+            return RedirectToAction("Index");
+
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

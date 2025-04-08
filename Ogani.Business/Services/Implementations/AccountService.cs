@@ -57,22 +57,27 @@ public class AccountService : IAccountService
     {
         return await _userManager.HasPasswordAsync(user);
     }
-    public async Task<IdentityResult> RegisterUserAsync(RegisterDto registerDto)
-    {
+	public async Task<IdentityResult> RegisterUserAsync(RegisterDto registerDto)
+	{
+		var user = new AppUser
+		{
+			UserName = registerDto.UserName,
+			NickName = registerDto.NickName,
+			Email = registerDto.Email,
+			EmailConfirmed = false,
+		};
 
+		var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-        var user = new AppUser
-        {
-            UserName = registerDto.UserName,
-            NickName = registerDto.NickName,
-            Email = registerDto.Email,
-            EmailConfirmed = false,
-        };
+		if (!result.Succeeded)
+			return result;
 
-        return await _userManager.CreateAsync(user, registerDto.Password);
-    }
+		await _userManager.AddToRoleAsync(user, "User");
 
-    public async Task<string> GenerateEmailConfirmationTokenAsync(AppUser user) =>
+		return result;
+	}
+
+	public async Task<string> GenerateEmailConfirmationTokenAsync(AppUser user) =>
         await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
     public async Task<AppUser> FindUserByEmailAsync(string email)

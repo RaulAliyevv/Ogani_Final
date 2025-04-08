@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Ogani.Core.Entities;
+using Ogani.Core.Entities.Base;
 using Ogani.DataAccess.Interceptors;
 
 namespace Ogani.DataAccess.Context;
@@ -18,6 +19,9 @@ public class AppDbContext : IdentityDbContext<AppUser>
     public DbSet<ProductImage> ProductImages { get; set; }
     public DbSet<Slider> Sliders { get; set; }
     public DbSet<Subscribe> Subscribes { get; set; }
+    public DbSet<Blog> Blogs { get; set; }
+    public DbSet<BasketItem> BasketItems { get; set; }
+    public DbSet<WishlistItem> WishlistItems { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

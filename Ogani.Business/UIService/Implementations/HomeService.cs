@@ -3,9 +3,12 @@ using Ogani.Business.Dtos.CategoryDtos;
 using Ogani.Business.Dtos.HomeDtos;
 using Ogani.Business.Dtos.ProductDtos;
 using Ogani.Business.Dtos.ProductImageDtos;
+using Ogani.Business.Dtos.Subscribes;
 using Ogani.Business.Exceptions;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.UIService.Abstracts;
+using Ogani.Core.Entities;
+using Ogani.DataAccess.Context;
 using System.Data;
 
 namespace Ogani.Business.UIService.Implementations;
@@ -15,13 +18,15 @@ internal class HomeService : IHomeService
     private readonly IProductService _productService;
     private readonly ICategoryService _categoryService;
     private readonly ISliderService _sliderService;
+    private readonly ISubscribeService _subscribeService;
 
 
-    public HomeService(IProductService productService, ICategoryService categoryService, ISliderService sliderService)
+    public HomeService(IProductService productService, ICategoryService categoryService, ISliderService sliderService, ISubscribeService subscribeService)
     {
         _productService = productService;
         _categoryService = categoryService;
         _sliderService = sliderService;
+        _subscribeService = subscribeService;
     }
 
     public async Task<HomeDto> GetHomeViewModelAsync()
@@ -88,5 +93,15 @@ internal class HomeService : IHomeService
 
         return model;
     }
+
+    public async Task<bool> CreateSubcribeAsync(SubscribeCreateDto dto)
+    {
+        if(dto is null) return false;
+
+        var model = await _subscribeService.CreateAsync(dto);
+
+        return true;
+    }
+
 
 }

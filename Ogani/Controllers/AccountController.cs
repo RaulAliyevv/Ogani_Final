@@ -1,19 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Ogani.Business.Dtos.AccountDtos;
 using Ogani.Business.Services.Abstractions;
+using Ogani.Core.Entities;
 
 namespace Ogani.Controllers;
 
 public class AccountController : Controller
 {
     private readonly IAccountService _accountService;
+    private readonly UserManager<AppUser> _userManager;
 
-    public AccountController(IAccountService accountService)
-    {
-        _accountService = accountService;
-    }
 
-    public IActionResult Register() => View();
+	public AccountController(IAccountService accountService, UserManager<AppUser> userManager)
+	{
+		_accountService = accountService;
+		_userManager = userManager;
+	}
+
+	public IActionResult Register() => View();
 
     [HttpPost]
     public async Task<IActionResult> Register(RegisterDto registerDto)
@@ -23,7 +28,8 @@ public class AccountController : Controller
 
         var result = await _accountService.RegisterUserAsync(registerDto);
 
-        if (!result.Succeeded)
+
+		if (!result.Succeeded)
         {
             foreach (var error in result.Errors)
             {
@@ -32,7 +38,8 @@ public class AccountController : Controller
             return View();
         }
 
-        var user = await _accountService.FindUserByEmailAsync(registerDto.Email);
+
+		var user = await _accountService.FindUserByEmailAsync(registerDto.Email);
         var token = await _accountService.GenerateEmailConfirmationTokenAsync(user);
 
         var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token }, Request.Scheme);
