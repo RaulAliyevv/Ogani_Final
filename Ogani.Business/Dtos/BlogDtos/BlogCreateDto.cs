@@ -1,0 +1,12 @@
+﻿using Microsoft.AspNetCore.Http;
+using Ogani.Business.Dtos.Base;
+
+namespace Ogani.Business.Dtos.BlogDtos;
+
+public class BlogCreateDto : IDto
+{
+    public string Title { get; set; } = null!;
+    public string Description { get; set; } = null!;
+    public  IFormFile ImageUrl { get; set; } = null!;
+    public string Text { get; set; } = null!;
+}

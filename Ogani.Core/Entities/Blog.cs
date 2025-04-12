@@ -7,6 +7,7 @@ namespace Ogani.Core.Entities
 		public string Title { get; set; } = null!;
 		public string Description { get; set; } = null!;
 		public string ImageUrl { get; set; } = null!;
+		public string Text { get; set; } = null!;
 
 	}
 }

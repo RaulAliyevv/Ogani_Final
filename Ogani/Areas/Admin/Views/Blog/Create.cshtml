@@ -1,0 +1,59 @@
+﻿@using Ogani.Business.Dtos.BlogDtos
+@model BlogCreateDto
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <h5 class="card-header"> Category create</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                        <input asp-for="ImageUrl" type="file" class="form-control" id="inputGroupFile01" />
+
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon11"></span>
+                        <input asp-for="Title"
+                               type="text"
+                               class="form-control"
+                               placeholder="Title"
+                               aria-label="Username"
+                               aria-describedby="basic-addon11" />
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon11"></span>
+                        <input asp-for="Description"
+                               type="text"
+                               class="form-control"
+                               placeholder="Description"
+                               aria-label="Username"
+                               aria-describedby="basic-addon11" />
+                    </div>
+
+
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon11"></span>
+                        <input asp-for="Text"
+                               type="text"
+                               class="form-control"
+                               placeholder="Text"
+                               aria-label="Username"
+                               aria-describedby="basic-addon11" />
+                    </div>
+
+
+                  
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.Services.Implementations;
+using Ogani.Business.UIService.Abstractions;
 using Ogani.Business.UIService.Abstracts;
 using Ogani.Business.UIService.Implementations;
 using System.Reflection;
@@ -31,6 +32,10 @@ public static class BusinessLogicLayerServiceRegistration
         services.AddScoped<ISliderService, SliderService>();
         services.AddScoped<ISubscribeService, SubscribeService>();
         services.AddScoped<IBasketService, BasketService>();
+        services.AddScoped<IShopService, ShopService>();
+        services.AddScoped<IBlogService, BlogService>();
+
+
 
         return services;
     }

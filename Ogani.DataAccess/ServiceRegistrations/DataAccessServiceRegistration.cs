@@ -33,6 +33,7 @@ namespace Ogani.DataAccess.ServiceRegistrations
             services.AddScoped<ISliderRepository, SliderRepository>();
             services.AddScoped<ISubscribeRepository, SubscribeRepository>();
             services.AddScoped<IBasketItemRepository, BasketItemRepository>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
 
             services.AddScoped<BaseAuditableInterceptor>();
 

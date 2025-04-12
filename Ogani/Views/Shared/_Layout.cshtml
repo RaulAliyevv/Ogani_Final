@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/style.css" type="text/css">
-</head>
+</head> 
 
 <body>
     <!-- Page Preloder -->
@@ -49,3 +49,45 @@
 </body>
 
 </html>
+
+<script>
+    function addToBasket(id) {
+        fetch('/Basket/AddToBasket?id=' + id, {
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    fetch('/Basket/GetCountAndTotal') 
+                        .then(res => res.json())
+                        .then(data => {
+                            document.getElementById("basket-count").innerText = data.count;
+                            document.getElementById("basket-total").innerText = data.total.toFixed(2) + " "+ "$";
+                        });
+                } else {
+                    console.log('Məhsul əlavə edilə bilmədi.');
+                }
+            });
+    }
+
+
+    function RemoveToBasket(id) {
+        fetch('/Basket/Deacrease?id=' + id, {
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    fetch('/Basket/GetCountAndTotal')
+                        .then(res => res.json())
+                        .then(data => {
+                            document.getElementById("basket-count").innerText = data.count;
+                            document.getElementById("basket-total").innerText = data.total.toFixed(2) + " " + "$";
+                        });
+                } else {
+                    console.log('Məhsul əlavə edilə bilmədi.');
+                }
+            });
+    }
+
+</script>

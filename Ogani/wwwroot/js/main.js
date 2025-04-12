@@ -222,3 +222,15 @@
     });
 
 })(jQuery);
+
+function addToBasket(id) {
+    fetch('/Basket/AddToBasket?id=' + id, {
+        method: 'POST'
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById("basket-count").innerText = data.count;
+            }
+        });
+}
