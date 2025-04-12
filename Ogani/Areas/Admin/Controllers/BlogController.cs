@@ -29,7 +29,11 @@ public class BlogController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(BlogCreateDto dto)
     {
-       var result = await _blogService.CreateBlog(dto);
+        if (!ModelState.IsValid)
+        {
+            return View(dto);
+        }
+        var result = await _blogService.CreateBlog(dto);
         if (!result.Success)
         {
             foreach (var error in result.Errors)

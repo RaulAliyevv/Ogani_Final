@@ -1,4 +1,4 @@
-﻿using Ogani.Core.Entities.Base;
+﻿using Ogani.Business.Dtos.BasketItemDtos;
 
 namespace Ogani.Business.Dtos.BasketDtos
 {

@@ -9,4 +9,5 @@ public class BlogDto : IDto
     public string Description { get; set; } = null!;
     public string ImageUrl { get; set; } = null!;
     public string Text { get; set; } = null!;
+    public DateTime CreatedTime { get; set; }
 }

@@ -1,0 +1,25 @@
+﻿@using Ogani.Business.Dtos.BlogDtos
+@model BlogDto
+<div class="col-lg-8 col-md-7 order-md-1 order-1">
+    <div class="blog__details__text">
+        <img src="@Model.ImageUrl" alt="">
+        <h3>
+           @Model.Title
+        </h3>
+        <p>
+           @Model.Text
+        </p>
+        <h2>
+            Description
+        </h2>
+        <p>
+           @Model.Description
+        </p>
+    </div>
+    <div class="blog__details__content">
+     <h4> Create Time</h4>
+     <p>
+         @Model.CreatedTime.ToString("dd MMMM yyyyy")
+     </p>
+    </div>
+</div>

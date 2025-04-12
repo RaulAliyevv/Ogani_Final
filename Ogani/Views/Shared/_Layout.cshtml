@@ -25,9 +25,9 @@
 
 <body>
     <!-- Page Preloder -->
-    @*   <div id="preloder">
+      <div id="preloder">
     <div class="loader"></div>
-    </div> *@
+    </div> 
 
     <!-- Humberger Begin -->
     @await Component.InvokeAsync("Header")
@@ -52,6 +52,7 @@
 
 <script>
     function addToBasket(id) {
+        event.preventDefault();
         fetch('/Basket/AddToBasket?id=' + id, {
             method: 'POST'
         })
@@ -64,6 +65,27 @@
                             document.getElementById("basket-count").innerText = data.count;
                             document.getElementById("basket-total").innerText = data.total.toFixed(2) + " "+ "$";
                         });
+                } else {
+                    console.log('Məhsul əlavə edilə bilmədi.');
+                }
+            });
+    }
+
+
+
+    function addToWishList(id) {
+        fetch('/Wishlist/AddToWishList?id=' + id, {
+            method: 'POST'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    fetch('/Wishlist/WishlistCount')
+                        .then(res => res.json())
+                        .then(data => {
+                            document.getElementById("wishlist-count").innerText = data.count;
+                        });
+
                 } else {
                     console.log('Məhsul əlavə edilə bilmədi.');
                 }

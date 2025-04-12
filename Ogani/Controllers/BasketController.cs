@@ -40,6 +40,13 @@ public class BasketController : Controller
 
         return Json(new { success = true, count = count, total = total });
     }
+    [HttpDelete]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _basketService.RemoveAllFromBasketAsync(id);
+
+        return Json(new { success = true });
+    }
 
     public async Task<IActionResult> GetCountAndTotal()
     {

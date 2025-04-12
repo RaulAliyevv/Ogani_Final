@@ -1,0 +1,43 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Ogani.Business.Services.Abstractions;
+using Ogani.Business.Services.Implementations;
+
+namespace Ogani.Controllers
+{
+    public class WishlistController : Controller
+    {
+        private readonly IWishlistService _wishlistService;
+
+        public WishlistController(IWishlistService wishlistService)
+        {
+            _wishlistService = wishlistService;
+        }
+
+
+        public async Task<IActionResult> Index()
+        {
+            var dto = await _wishlistService.WishListCardDto();
+            return View(dto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToWishList(int id)
+        {
+            await _wishlistService.AddToWishListAsync(id);
+            return Json(new { success = true });
+        }
+
+        public async Task<IActionResult> WishlistCount()
+        {
+            var count = await _wishlistService.WishlistCount();
+            return Json(new { count = count });
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _wishlistService.AddToWishListAsync(id);
+            return Ok();
+        }
+
+    }
+}

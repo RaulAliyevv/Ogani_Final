@@ -1,0 +1,34 @@
+﻿@using Ogani.Business.Dtos.SettingDtos
+@model List<SettingDto>
+
+<div class="card">
+    <h5 class="card-header">Settings</h5>
+    <div class="table-responsive text-nowrap">
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Key</th>
+                    <th>Value</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var setting in Model)
+                {
+                    <tr>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@setting.Id</strong></td>
+
+                        <td>@setting.Key</td>
+                        <td>@setting.Value</td>
+                        <td><a asp-controller="Setting" asp-action="Update" asp-route-id="@setting.Id" class="badge bg-label-primary me-1">Update</a></td>
+                       
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -5,9 +5,9 @@ using Ogani.DataAccess.Repositories.Implementations.Generic;
 
 namespace Ogani.DataAccess.Repositories.Implementations;
 
-internal class BasketItemRepository : Repository<BasketItem>, IBasketItemRepository
+internal class WishlistItemRepository : Repository<WishlistItem>, IWishlistItemRepository
 {
-    public BasketItemRepository(AppDbContext context) : base(context)
+    public WishlistItemRepository(AppDbContext context) : base(context)
     {
     }
 }

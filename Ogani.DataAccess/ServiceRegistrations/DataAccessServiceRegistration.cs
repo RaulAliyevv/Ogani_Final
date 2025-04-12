@@ -26,14 +26,25 @@ namespace Ogani.DataAccess.ServiceRegistrations
 
         private static void AddRepositories(IServiceCollection services)
         {
+
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
             services.AddScoped<IProductRepository, ProductRepository>();
+
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+
             services.AddScoped<IProductImageRepository, ProductImageRepository>();
+
             services.AddScoped<ISliderRepository, SliderRepository>();
+
             services.AddScoped<ISubscribeRepository, SubscribeRepository>();
+
             services.AddScoped<IBasketItemRepository, BasketItemRepository>();
+            services.AddScoped<IWishlistItemRepository, WishlistItemRepository>();
+
             services.AddScoped<IBlogRepository, BlogRepository>();
+
+            services.AddScoped<ISettingRepository, SettingRepository>();
 
             services.AddScoped<BaseAuditableInterceptor>();
 

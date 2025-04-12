@@ -66,7 +66,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="index.html" class="app-brand-link">
+                    <a asp-action="index" class="app-brand-link">
                         <span class="app-brand-logo demo">
                             <svg width="25"
                                  viewBox="0 0 25 42"
@@ -123,7 +123,7 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a href="index.html" class="menu-link">
+                        <a asp-controller="Doshboard" asp-action= "index" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -155,6 +155,11 @@
                             <li class="menu-item">
                                 <a asp-controller="Slider" asp-action="index" class="menu-link">
                                     <div>Slider</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a asp-controller="Setting" asp-action="index" class="menu-link">
+                                    <div>Setting</div>
                                 </a>
                             </li>
                            

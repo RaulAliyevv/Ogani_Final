@@ -29,11 +29,19 @@ public static class BusinessLogicLayerServiceRegistration
         services.AddScoped<IAccountService, AccountService>();
 
         services.AddScoped<IHomeService, HomeService>();
+
         services.AddScoped<ISliderService, SliderService>();
+
         services.AddScoped<ISubscribeService, SubscribeService>();
+
         services.AddScoped<IBasketService, BasketService>();
+        services.AddScoped<IWishlistService, WishlistService>();
+
         services.AddScoped<IShopService, ShopService>();
+
         services.AddScoped<IBlogService, BlogService>();
+
+        services.AddScoped<ISettingService, SettingService>();
 
 
 

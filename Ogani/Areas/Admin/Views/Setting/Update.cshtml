@@ -1,0 +1,38 @@
+﻿@using Ogani.Business.Dtos.SettingDtos
+@model SettingUpdateDto
+<form asp-action="Update" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <h5 class="card-header"> Setting Update</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+                    <h2> @Model.Key</h2>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon11"></span>
+                        <input asp-for="Value"
+                               type="text"
+                               class="form-control"
+                               placeholder="Value"
+                               aria-label="Username"
+                               aria-describedby="basic-addon11" />
+                    </div>
+
+
+
+
+
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                        <input asp-for="UploadedImage" type="file" class="form-control" id="inputGroupFile01" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

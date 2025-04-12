@@ -19,14 +19,16 @@ internal class HomeService : IHomeService
     private readonly ICategoryService _categoryService;
     private readonly ISliderService _sliderService;
     private readonly ISubscribeService _subscribeService;
+   private readonly IBlogService _blogService;
 
 
-    public HomeService(IProductService productService, ICategoryService categoryService, ISliderService sliderService, ISubscribeService subscribeService)
+    public HomeService(IProductService productService, ICategoryService categoryService, ISliderService sliderService, ISubscribeService subscribeService, IBlogService blogService)
     {
         _productService = productService;
         _categoryService = categoryService;
         _sliderService = sliderService;
         _subscribeService = subscribeService;
+        _blogService = blogService;
     }
 
     public async Task<HomeDto> GetHomeViewModelAsync()
@@ -38,6 +40,9 @@ internal class HomeService : IHomeService
             .Include(y => y.Category!)
 
         );
+
+
+
 
         var productDtos = products.Select(product => new ProductDto
         {
@@ -58,11 +63,21 @@ internal class HomeService : IHomeService
             }).ToList()
         }).ToList();
 
+
+        var blogs = await _blogService.GetAllAsync();
+
+        var latestBlogs = blogs
+            .OrderByDescending(b => b.CreatedTime)
+            .Take(6)
+            .ToList();
+
+
         return new HomeDto
         {
             Categories = categories,
             Products = productDtos,
-            SliderDto =slider
+            SliderDto =slider,
+            BlogDtos = latestBlogs
         };
     }
 
@@ -82,6 +97,7 @@ internal class HomeService : IHomeService
           x.CategoryId == product.CategoryId && x.Id != id);
 
 
+      
 
 
         var model = new DetailDto

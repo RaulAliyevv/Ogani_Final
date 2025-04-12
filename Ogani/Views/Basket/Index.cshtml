@@ -45,8 +45,11 @@
                                         $@basket.TotalProductPrice.ToString("0.00")
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
+                                        <a href="javascript:void(0);" onclick="removeFromBasket(this, @basket.ProductId)">
+                                            <span class="icon_close"></span>
+                                        </a>
                                     </td>
+
                                 </tr>
 
                             }
@@ -66,17 +69,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Discount Codes</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">APPLY COUPON</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+         
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Cart Total</h5>
@@ -89,3 +82,32 @@
         </div>
     </div>
 </section>
+
+<script>
+  function removeFromBasket(element, productId) {
+    fetch(`/basket/delete/${productId}`, {
+        method: 'DELETE'
+    })
+    .then(res => {
+        if (res.ok) {
+            const row = element.closest('tr'); // Kliklənən `a`-nın olduğu `tr`-ni tapırıq
+            if (row) row.remove(); // Sətri silirik
+            
+            // Total və count yeniləyirik
+            fetch('/basket/GetCountAndTotal')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("basket-count").innerText = data.count;
+                    document.getElementById("basket-total").innerText = data.total.toFixed(2) + " " + "$";
+                });
+        } else {
+            alert("Silinmə zamanı xəta baş verdi.");
+        }
+    })
+    .catch(error => {
+        console.error('Xəta:', error);
+        alert("Xəta baş verdi.");
+    });
+}
+
+</script>

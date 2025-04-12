@@ -30,6 +30,10 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(ProductCreateDto dto)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(dto);
+        }
         var result = await _productService.ProductCreate(dto);
 
         if (!result.Success)

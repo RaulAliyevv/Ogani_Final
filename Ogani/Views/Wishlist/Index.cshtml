@@ -1,0 +1,58 @@
+﻿@using Ogani.Business.Dtos.WishlistDtos
+@model WishListCardDto
+
+<section class="shoping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="shoping__product">Products</th>
+                                <th>Price</th>
+
+                                <th>Add to Basket</th>
+
+                                <th> Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Prroduct)
+                            {
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="@Url.Content(item.ImageUrl)" alt="@item.Name" width="100">
+                                        <h5>@item.Name</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        ₼@item.Price.ToString("0.00")
+                                    </td>
+                                    <td>
+                                        <form href="javascript:void(0);" onclick="addToBasket(@item.ProductId)" method="post">
+                                            <input type="hidden" name="id" value="@item.ProductId" />
+                                            <button type="submit" class="btn btn-sm btn-success">Add</button>
+                                        </form>
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <a asp-controller="Wishlist" asp-action="Remove" asp-route-id="@item.ProductId" class="icon_close" style="color: red;"></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns">
+                    <a href="/" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

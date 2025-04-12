@@ -1,0 +1,53 @@
+﻿@using Ogani.Business.Dtos.BlogDtos
+@model List<BlogDto>
+<section class="blog spad">
+    <div class="container">
+        <div class="row">
+          @*   <div class="col-lg-4 col-md-5">
+                <div class="blog__sidebar">
+                   @*  <div class="blog__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div> 
+                 
+                   
+            </div> *@
+            <div class="col-lg-12 col-md-7">
+                <div class="row">
+                    @foreach (var blog in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="@blog.ImageUrl" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> @blog.CreatedTime.ToString("dd MMMM yyyy")</li>
+                                    </ul>
+                                    <h5><a asp-action="Detail" asp-route-id="@blog.Id">@blog.Title</a></h5>
+                                    <p>
+                                      @blog.Description
+                                    </p>
+                                    <a asp-action="Detail" asp-route-id="@blog.Id" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                   
+                 
+                    <div class="col-lg-12">
+                        <div class="product__pagination blog__pagination">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
