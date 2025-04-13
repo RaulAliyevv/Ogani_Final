@@ -7,4 +7,7 @@ namespace Ogani.Business.Services.Abstractions;
 public interface IBlogService : ICrudService<Blog, BlogCreateDto, BlogUpdateDto, BlogDto>
 {
     Task<(bool Success, List<string> Errors)> CreateBlog(BlogCreateDto dto);
+    Task<bool> Update(BlogUpdateDto dto);
+    Task<bool> Delete(int id);
+    Task<BlogUpdateDto> BlogUpdateDto(int id);  
 }

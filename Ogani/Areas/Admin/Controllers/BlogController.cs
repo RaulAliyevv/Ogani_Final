@@ -45,4 +45,26 @@ public class BlogController : Controller
         }
         return RedirectToAction("index");
     }
+
+
+    public async Task<IActionResult> Update(int id)
+    {
+        var dto = await _blogService.BlogUpdateDto(id);
+        return View(dto);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Update(BlogUpdateDto dto)
+    {
+       
+        await _blogService.Update(dto);
+        return RedirectToAction("index");
+    }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var isSuccess =await _blogService.Delete(id);
+      
+        return RedirectToAction("index");
+
+    }
 }

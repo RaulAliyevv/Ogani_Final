@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Ogani.Business.Dtos.CategoryDtos;
 using Ogani.Business.Exceptions;
+using Ogani.Business.Helpers;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.Services.Implementations.Generic;
 using Ogani.Core.Entities;
@@ -26,14 +27,21 @@ public class CategoryService : CrudService<Category, CategoryCreateDto, Category
         if (dto == null) return false;
 
         if (string.IsNullOrWhiteSpace(dto.Name))
-            throw new ValidationException("Kategoriya adı boş ola bilməz!");
+            throw new NotFoundException("Category is null");
 
         if (dto.ImageFile == null || dto.ImageFile.Length == 0)
-            throw new ValidationException("Şəkil mütləqdir!");
+            throw new NotFoundException("Image is requared");
+        var result = FileHelper.ValidateImage(dto.ImageFile);
 
+        if (!result.IsSuccess)
+        {
+            throw new NotFoundException($" File Is not image or file size  200 mb");
+          
+        }
         var img = await _cloudinaryManager.FileCreateAsync(dto.ImageFile);
         if (img == null)
-            throw new Exception("Şəkil yüklənmədi!");
+            throw new Exception("image is not upload");
+
 
         var model = new Category
         {
@@ -61,7 +69,13 @@ public class CategoryService : CrudService<Category, CategoryCreateDto, Category
             var img = await _cloudinaryManager.FileCreateAsync(dto.ImageFile);
             if (img == null)
                 throw new NotFoundException("Not Found Image");
+            var result = FileHelper.ValidateImage(dto.ImageFile);
 
+            if (!result.IsSuccess)
+            {
+                throw new NotFoundException($" File Is not image or file size  200 mb");
+
+            }
             category.ImageUrl = img;
         }
 

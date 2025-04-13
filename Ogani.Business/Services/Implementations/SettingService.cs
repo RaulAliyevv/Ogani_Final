@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Ogani.Business.Dtos.SettingDtos;
+using Ogani.Business.Dtos.SliderDtos;
 using Ogani.Business.Exceptions;
+using Ogani.Business.Helpers;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.Services.Implementations.Generic;
 using Ogani.Core.Entities;
@@ -45,11 +47,16 @@ public class SettingService : CrudService<Setting, SettingCreateDto, SettingUpda
 
         if (setting == null)
         {
-            throw new Exception("Setting not found");
+            throw new NotFoundException("Setting not found");
         }
 
         if (settingUpdateDTO.UploadedImage != null)
         {
+            var validationResult = FileHelper.ValidateImage(settingUpdateDTO.UploadedImage);
+            if (!validationResult.IsSuccess)
+                throw new NotFoundException("File is not image və size is not 200MB.");
+
+
             var filePath = await _cloudinaryManager.FileCreateAsync(settingUpdateDTO.UploadedImage);
 
             setting.Value = filePath;
@@ -58,7 +65,7 @@ public class SettingService : CrudService<Setting, SettingCreateDto, SettingUpda
         {
             if(settingUpdateDTO.Value == null)
             {
-                throw new Exception("Setting not found");
+                throw new NotFoundException("Setting not found");
             }
             setting.Value = settingUpdateDTO.Value;
 

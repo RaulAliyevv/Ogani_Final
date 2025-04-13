@@ -1,0 +1,43 @@
+﻿@using Ogani.Business.Dtos.ContactDtos
+@model List<ContactDto>
+
+<div class="card">
+    <h5 class="card-header">Contact</h5>
+    <div class="table-responsive text-nowrap">
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>ISAnswer</th>
+                    <th>Answer</th>
+                    <th>Delete</th>
+                    <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var contactDto in Model)
+                {
+                    <tr>
+
+                        <td>@contactDto.Name</td>
+                        <td>@contactDto.Email</td>
+                        <td>@contactDto.IsAnswer</td>
+                        <td>
+                            <a asp-controller="Contact" asp-action="Update" asp-route-id="@contactDto.Id" class="badge bg-label-primary me-1">Answer</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Contact" asp-action="Delete" asp-route-id="@contactDto.Id" class="badge bg-label-primary me-1">Delete</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Contact" asp-action="Detail" asp-route-id="@contactDto.Id" class="badge bg-label-primary me-1">Detail</a>
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

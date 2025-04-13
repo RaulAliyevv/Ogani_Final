@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Ogani.Business.Dtos.Base;
 using Ogani.Business.Dtos.SliderDtos;
 using Ogani.Business.Exceptions;
+using Ogani.Business.Helpers;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.Services.Implementations.Generic;
 using Ogani.Core.Entities;
@@ -50,12 +52,13 @@ public class SliderService : CrudService<Slider, CreateSliderDto, UpdateSliderDt
         var slider = await _sliderRepository.GetAsync(updateSliderDto.Id);
 
         if (slider == null) throw new NotFoundException();
-
         if (updateSliderDto.ImgUrl != null)
         {
-            string newImageUrl = await _cloudinary.FileCreateAsync(updateSliderDto.ImgUrl);
 
-          
+            var validationResult = FileHelper.ValidateImage(updateSliderDto.ImgUrl);
+            if (!validationResult.IsSuccess)
+                throw new NotFoundException("File is not image və size is not 200MB.");
+            string newImageUrl = await _cloudinary.FileCreateAsync(updateSliderDto.ImgUrl);
 
             slider.ImgUrl = newImageUrl;
         }

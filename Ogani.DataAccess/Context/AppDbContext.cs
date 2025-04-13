@@ -38,6 +38,7 @@ public class AppDbContext : IdentityDbContext<AppUser>
 
         modelBuilder.Entity<Category>().HasQueryFilter(c => !c.IsDeleted);
         modelBuilder.Entity<Product>().HasQueryFilter(c => !c.IsDeleted);
+        modelBuilder.Entity<Blog>().HasQueryFilter(c => !c.IsDeleted);
     }
 
 
