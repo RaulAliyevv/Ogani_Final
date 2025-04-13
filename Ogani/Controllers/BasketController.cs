@@ -56,6 +56,33 @@ public class BasketController : Controller
         return Json(new {  count = count, total = total });
     }
 
+    //[HttpGet("get-product")]
+    //public async Task<IActionResult> GetProduct(int id)
+    //{
+    //    var cardDto = await _basketService.GetBasketAsync();
+    //    var product = cardDto.Prroduct.FirstOrDefault(p => p.ProductId == id);
 
+    //    if (product == null) return NotFound();
 
+    //    return Ok(new
+    //    {
+    //        count = product.Count,
+    //        totalPrice = product.TotalProductPrice
+    //    });
+    //}
+
+    [HttpGet]
+    public async Task<IActionResult> GetProduct(int id)
+    {
+        var cardDto = await _basketService.GetBasketAsync();
+        var product = cardDto.Prroduct.FirstOrDefault(p => p.ProductId == id);
+
+        if (product == null) return NotFound();
+
+        return Ok(new
+        {
+            count = product.Count,
+            totalPrice = product.TotalProductPrice
+        });
+    }
 }

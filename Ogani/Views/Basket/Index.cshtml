@@ -26,22 +26,21 @@
                                         <img src="@basket.img" alt="" width="100px">
                                         <h5>@basket.ProductName</h5>
                                     </td>
-                                    <td class="shoping__cart__price">
+                                    <td class="shoping__cart__price" id="product-price-@basket.ProductId">
                                         @basket.ProductPrice
                                     </td>
                                     <td class="">
-                                        <div >
+                                        <div>
                                             <div class="">
-                                                <button class=" text-danger" onclick="addToBasket(@basket.ProductId)"> + </button>
-                                             <span>
-                                                 @basket.Count 
-                                             </span>
+                                                <button class="text-danger" onclick="addToBasket(@basket.ProductId)"> + </button>
+                                                <span class="product-count" id="product-count-@basket.ProductId">
+                                                    @basket.Count
+                                                </span>
                                                 <button class="text-danger" onclick="RemoveToBasket(@basket.ProductId)"> - </button>
-
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="shoping__cart__total">
+                                    <td class="shoping__cart__total" id="product-total-@basket.ProductId">
                                         $@basket.TotalProductPrice.ToString("0.00")
                                     </td>
                                     <td class="shoping__cart__item__close">
@@ -69,7 +68,17 @@
                     </a>
                 </div>
             </div>
-         
+            <div class="col-lg-6">
+                <div class="shoping__continue">
+                    <div class="shoping__discount">
+                        <h5>Discount Codes</h5>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your coupon code">
+                            <button type="submit" class="site-btn">APPLY COUPON</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Cart Total</h5>
@@ -98,7 +107,9 @@
                 .then(res => res.json())
                 .then(data => {
                     document.getElementById("basket-count").innerText = data.count;
-                    document.getElementById("basket-total").innerText = data.total.toFixed(2) + " " + "$";
+                            document.getElementById("basketViewTotal").innerText = data.total.toFixed(2) + " " + "$";
+
+                            document.getElementById("basket-total").innerText = data.total.toFixed(2) + " " + "$";
                 });
         } else {
             alert("Silinmə zamanı xəta baş verdi.");
@@ -110,4 +121,31 @@
     });
 }
 
+
+ document.addEventListener("DOMContentLoaded", function () {
+        const plusButtons = document.querySelectorAll("button[onclick^='addToBasket']");
+        const minusButtons = document.querySelectorAll("button[onclick^='RemoveToBasket']");
+
+        plusButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const span = button.parentElement.querySelector(".product-count");
+                if (span) {
+                    let count = parseInt(span.innerText.trim());
+                    span.innerText = count + 1;
+                }
+            });
+        });
+
+        minusButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const span = button.parentElement.querySelector(".product-count");
+                if (span) {
+                    let count = parseInt(span.innerText.trim());
+                    if (count > 1) {
+                        span.innerText = count - 1;
+                    }
+                }
+            });
+        });
+    });
 </script>

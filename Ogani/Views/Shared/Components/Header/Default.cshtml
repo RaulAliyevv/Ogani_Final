@@ -42,8 +42,8 @@
                     <li><a href="./blog-details.html">Blog Details</a></li>
                 </ul>
             </li>
-            <li><a href="./blog.html">Blog</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a asp-controller="Blog" asp-action="index">Blog</a></li>
+            <li><a asp-action="Create" asp-controller="Contact">Contact</a></li>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -113,7 +113,7 @@
                         <li><a asp-action="index" asp-controller="Shop" >Shop</a></li>
                       
                         <li><a asp-action="index" asp-controller="blog">Blog</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a asp-action="Create" asp-controller="Contact">Contact</a></li>
                     </ul>
                 </nav>
             </div>

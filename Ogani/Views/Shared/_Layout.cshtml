@@ -59,19 +59,19 @@
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    fetch('/Basket/GetCountAndTotal') 
+                    fetch('/Basket/GetCountAndTotal')
                         .then(res => res.json())
                         .then(data => {
                             document.getElementById("basket-count").innerText = data.count;
-                            document.getElementById("basket-total").innerText = data.total.toFixed(2) + " "+ "$";
+                            document.getElementById("basket-total").innerText = data.total.toFixed(2) + " $";
+                            document.getElementById("basketViewTotal").innerText = data.total.toFixed(2) + " $";
+                            updateProductUI(id);  
                         });
                 } else {
                     console.log('Məhsul əlavə edilə bilmədi.');
                 }
             });
     }
-
-
 
     function addToWishList(id) {
         fetch('/Wishlist/AddToWishList?id=' + id, {
@@ -85,13 +85,11 @@
                         .then(data => {
                             document.getElementById("wishlist-count").innerText = data.count;
                         });
-
                 } else {
                     console.log('Məhsul əlavə edilə bilmədi.');
                 }
             });
     }
-
 
     function RemoveToBasket(id) {
         fetch('/Basket/Deacrease?id=' + id, {
@@ -104,12 +102,48 @@
                         .then(res => res.json())
                         .then(data => {
                             document.getElementById("basket-count").innerText = data.count;
-                            document.getElementById("basket-total").innerText = data.total.toFixed(2) + " " + "$";
+                            document.getElementById("basketViewTotal").innerText = data.total.toFixed(2) + " $";
+                            document.getElementById("basket-total").innerText = data.total.toFixed(2) + " $";
+                            updateProductUI(id);  
                         });
                 } else {
-                    console.log('Məhsul əlavə edilə bilmədi.');
+                    console.log('Məhsul azaldıla bilmədi.');
                 }
             });
     }
+
+    function updateProductUI(id) {
+        const countElement = document.getElementById(`product-count-${id}`);
+        let count = parseInt(countElement.innerText);
+
+        const priceElement = document.getElementById(`product-price-${id}`);
+        const price = parseFloat(priceElement.innerText);
+        const totalPrice = (count * price).toFixed(2);
+
+        const totalElement = document.getElementById(`product-total-${id}`);
+        totalElement.innerText = `$${totalPrice}`;
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const cartIcons = document.querySelectorAll('.fa-shopping-cart');
+
+        cartIcons.forEach(icon => {
+            icon.addEventListener('click', function () {
+                const productId = icon.getAttribute('data-product-id');
+
+                Swal.fire({
+                    title: "Product Added!",
+                    text: "Product ID: " + productId + " has been added to your basket.",
+                    icon: "success",
+                    confirmButtonText: 'OK',
+                    draggable: true
+                });
+
+
+            });
+        });
+    });
 
 </script>

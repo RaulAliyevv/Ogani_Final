@@ -40,11 +40,14 @@ namespace Ogani.DataAccess.ServiceRegistrations
             services.AddScoped<ISubscribeRepository, SubscribeRepository>();
 
             services.AddScoped<IBasketItemRepository, BasketItemRepository>();
+
             services.AddScoped<IWishlistItemRepository, WishlistItemRepository>();
 
             services.AddScoped<IBlogRepository, BlogRepository>();
 
             services.AddScoped<ISettingRepository, SettingRepository>();
+
+            services.AddScoped<IContactRepository, ContactRepository>();
 
             services.AddScoped<BaseAuditableInterceptor>();
 

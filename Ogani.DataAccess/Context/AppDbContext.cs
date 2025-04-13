@@ -21,6 +21,7 @@ public class AppDbContext : IdentityDbContext<AppUser>
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<BasketItem> BasketItems { get; set; }
     public DbSet<WishlistItem> WishlistItems { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
     
     public DbSet<Setting> Settings { get; set; }
 

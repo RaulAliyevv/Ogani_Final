@@ -15,14 +15,18 @@ public class ProductService : CrudService<Product, ProductCreateDto, ProductUpda
     private readonly ICloudinaryManager _cloudinaryManager;
     private readonly IProductRepository _productRepository;
     private readonly IProductImageRepository _productImageRepository;
+    private readonly IEmailService _emailService;
+    private readonly ISubscribeService _subscribeService;
     private readonly IMapper _mapper;
-    public ProductService(IProductRepository repository, IMapper mapper, ICategoryService categoryService, ICloudinaryManager cloudinaryManager, IProductImageRepository productImageRepository) : base(repository, mapper)
+    public ProductService(IProductRepository repository, IMapper mapper, ICategoryService categoryService, ICloudinaryManager cloudinaryManager, IProductImageRepository productImageRepository, IEmailService emailService, ISubscribeService subscribeService) : base(repository, mapper)
     {
         _categoryService = categoryService;
         _cloudinaryManager = cloudinaryManager;
         _productRepository = repository;
         _productImageRepository = productImageRepository;
         _mapper = mapper;
+        _emailService = emailService;
+        _subscribeService = subscribeService;
     }
     public async Task<ProductCreateDto> GetCreatedProductDto()
     {
@@ -140,7 +144,19 @@ public class ProductService : CrudService<Product, ProductCreateDto, ProductUpda
             await _productImageRepository.CreateAsync(imageRecord);
         }
 
+        var subscribers = await _subscribeService.GetAllAsync();
+        foreach (var subscriber in subscribers)
+        {
+            string body = $"<h2>Yeni məhsul əlavə olundu!</h2>" +
+                          $"<p><strong>{dto.Name}</strong> - <strong>{dto.Price} AZN</strong></p>" +
+                          $"<p>{dto.Description}</p>"+
+            $"<p>Ətraflı məlumat üçün saytımıza baxın.</p>";
+
+             _emailService.SendEmail(subscriber.Email, "Yeni məhsul xəbərdarlığı", body);
+        }
         return (true, new List<string>());
+
+     
 
     }
 

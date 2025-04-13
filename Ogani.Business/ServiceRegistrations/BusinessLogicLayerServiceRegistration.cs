@@ -14,8 +14,9 @@ public static class BusinessLogicLayerServiceRegistration
     public static IServiceCollection AddBllServices(this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
         services.AddScoped<IProductService, ProductService>();
-        //services.AddScoped<IProductCategoryService, ProductCategoryService>();
+
         services.AddScoped<IProductImageService, ProductImageService>();
 
         services.AddScoped<ICategoryService, CategoryService>();
@@ -35,6 +36,7 @@ public static class BusinessLogicLayerServiceRegistration
         services.AddScoped<ISubscribeService, SubscribeService>();
 
         services.AddScoped<IBasketService, BasketService>();
+
         services.AddScoped<IWishlistService, WishlistService>();
 
         services.AddScoped<IShopService, ShopService>();
@@ -42,6 +44,8 @@ public static class BusinessLogicLayerServiceRegistration
         services.AddScoped<IBlogService, BlogService>();
 
         services.AddScoped<ISettingService, SettingService>();
+
+        services.AddScoped<IContactService, ContactService>();
 
 
 
