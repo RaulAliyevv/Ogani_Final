@@ -1,0 +1,49 @@
+﻿@using Ogani.Business.Dtos.ContactDtos
+@model ContactCreateDto
+<form asp-action="Answer" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="row">
+        <!-- Basic -->
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <h5 class="card-header">Answer Message</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+                  
+                    
+                        <h5 class="card-header"> @Model.Name</h5>
+
+                    <span class="card-header"> @Model.Email</span>
+                       
+                        <span class="card-header"> @Model.Message</span>
+
+                 
+
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon11"></span>
+                        <input asp-for="Answer"
+                               type="text"
+                               class="form-control"
+                               placeholder="Answer"
+                               aria-label="Description"
+                               aria-describedby="basic-addon11" />
+                    </div>
+
+                  
+                    <input type="hidden" asp-for="Email" />
+                    <input type="hidden" asp-for="Name" />
+                    <input type="hidden" asp-for="Message" />
+                    <input type="hidden" asp-for="IsAnswer" />
+                    <input type="hidden" asp-for="Id" />
+
+
+                  
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>

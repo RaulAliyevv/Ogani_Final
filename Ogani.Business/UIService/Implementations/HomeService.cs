@@ -50,7 +50,7 @@ internal class HomeService : IHomeService
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,
-            IsMainPicture = product.ProductImages?.FirstOrDefault()?.ImageUrl,
+            IsMainPicture = product.IsMainPicture,
             Categories = product.Categories?.Select(pc => new CategoryDto
             {
                 Id = pc.Id,

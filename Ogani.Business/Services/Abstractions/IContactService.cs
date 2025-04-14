@@ -6,4 +6,6 @@ namespace Ogani.Business.Services.Abstractions;
 
 public interface IContactService : ICrudService<Contact, ContactCreateDto, ContactUpdateDto, ContactDto>
 {
+    Task<ContactCreateDto> ContactCreateDtoAsync(int id);
+    Task<bool> SendEmailContact(ContactCreateDto dto);
 }
