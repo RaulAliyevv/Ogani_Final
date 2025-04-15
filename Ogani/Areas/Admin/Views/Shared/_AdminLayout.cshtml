@@ -123,9 +123,16 @@
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item active">
-                        <a asp-controller="Doshboard" asp-action= "index" class="menu-link">
+                        <a asp-controller="Dashboard" asp-action="index" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item active">
+                        <a asp-controller="UserRoles" asp-action="index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">UserRoles (Only Admin)</div>
                         </a>
                     </li>
 

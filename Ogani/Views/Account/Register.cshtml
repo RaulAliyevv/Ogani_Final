@@ -72,6 +72,22 @@
             font-size: 14px;
             text-align: left;
         }
+
+
+
+        .btn-like-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: green; /* mavi rəng */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -96,7 +112,11 @@
 
             <button type="submit">Sign Up</button>
         </form>
+        <a class="btn-like-button" asp-action="Login" asp-controller="Account">Login</a>
     </div>
+
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>

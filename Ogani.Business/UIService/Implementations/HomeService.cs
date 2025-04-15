@@ -102,6 +102,7 @@ internal class HomeService : IHomeService
 
         var model = new DetailDto
         {
+            Id=id,
             Product = product,
             SliderDto=slider,
             RelatedProducts = relatedProducts
