@@ -1,0 +1,32 @@
+﻿@using Ogani.Business.Dtos.Subscribes
+@model List<SubscribeDto>
+
+<div class="card">
+    <h5 class="card-header">Blogs</h5>
+    <div class="table-responsive text-nowrap">
+        <a asp-controller="Blog" asp-action="create" type="submit" class="btn btn-primary">Create</a>
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Subscribe</th>
+      
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var subscribe in Model)
+                {
+                    <tr>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@subscribe.Email</strong></td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Subscribed</strong></td>
+                        
+                      
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -15,6 +15,7 @@
                         <input asp-for="ImageUrl" type="file" class="form-control" id="inputGroupFile01" />
 
                     </div>
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
 
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon11"></span>
@@ -25,6 +26,8 @@
                                aria-label="Username"
                                aria-describedby="basic-addon11" />
                     </div>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+
 
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon11"></span>
@@ -34,7 +37,10 @@
                                placeholder="Description"
                                aria-label="Username"
                                aria-describedby="basic-addon11" />
+
                     </div>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+
 
 
                     <div class="input-group">
@@ -46,6 +52,8 @@
                                aria-label="Username"
                                aria-describedby="basic-addon11" />
                     </div>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+
 
 
 

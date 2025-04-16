@@ -74,9 +74,22 @@
                     <div class="header__top__right">
                         @if (User.Identity.IsAuthenticated)
                         {
+                            if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                            {
+                                <div class="header__top__right__auth">
+                                    <a asp-action="Index" asp-controller="Dashboard" asp-area="Admin">
+                                        <span><i class="fa fa-user"></i> @User.Identity.Name</span>
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                
                             <div class="header__top__right__auth">
+
                                 <span><i class="fa fa-user"></i> @User.Identity.Name</span>
                             </div>
+                            }
                             <div class="header__top__right__auth">
                                 <form asp-action="Logout" asp-controller="Account" method="post" style="display:inline;">
                                     <button type="submit" style="background:none;border:none;color:inherit;cursor:pointer;">

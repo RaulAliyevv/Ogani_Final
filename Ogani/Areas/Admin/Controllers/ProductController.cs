@@ -6,7 +6,8 @@ using Ogani.Business.Services.Abstractions;
 namespace Ogani.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin,Maderator")]
+
 
 public class ProductController : Controller
 {
@@ -30,6 +31,9 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(ProductCreateDto dto)
     {
+        var dtos = await _productService.GetCreatedProductDto();
+        dto.Categories = dtos.Categories;
+
         if (!ModelState.IsValid)
         {
             return View(dto);
@@ -60,6 +64,8 @@ public class ProductController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(ProductUpdateDto dto)
     {
+        var dtos = await _productService.GetProductUpdateDto(dto.Id);
+        dto.Categories = dtos.Categories;
         if (!ModelState.IsValid)
         {
             return View(dto);

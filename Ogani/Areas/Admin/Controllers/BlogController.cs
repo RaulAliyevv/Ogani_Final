@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Ogani.Business.Dtos.BlogDtos;
 using Ogani.Business.Services.Abstractions;
 using Ogani.Business.Services.Implementations;
@@ -6,6 +7,7 @@ using Ogani.Business.Services.Implementations;
 namespace Ogani.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin,Maderator")]
 public class BlogController : Controller
 {
     private readonly IBlogService _blogService;

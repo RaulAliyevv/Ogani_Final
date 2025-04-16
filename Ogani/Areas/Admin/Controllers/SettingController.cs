@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Ogani.Business.Dtos.SettingDtos;
 using Ogani.Business.Services.Abstractions;
 
 namespace Ogani.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Maderator")]
+
     public class SettingController : Controller
     {
         private readonly ISettingService _settingService;

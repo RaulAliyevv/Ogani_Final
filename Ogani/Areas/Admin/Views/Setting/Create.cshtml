@@ -19,6 +19,7 @@
                                aria-describedby="basic-addon11" />
                     </div>
 
+                    <span asp-validation-for="Key" class="text-danger"></span>
 
 
 
@@ -27,6 +28,8 @@
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>
                         <input asp-for="Value" type="file" class="form-control" id="inputGroupFile01" />
                     </div>
+                    <span asp-validation-for="Value" class="text-danger"></span>
+
                 </div>
             </div>
         </div>

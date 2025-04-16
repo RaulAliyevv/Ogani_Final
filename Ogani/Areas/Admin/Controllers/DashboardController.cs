@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ogani.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin")]
+
+[Authorize(Roles = "Admin,Maderator")]
+
 
 public class DashboardController : Controller
 {

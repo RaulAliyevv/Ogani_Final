@@ -84,9 +84,12 @@
 
             <input asp-for="Email" type="email" placeholder="Enter your email">
             <span class="validation" asp-validation-for="Email"></span>
+            <span asp-validation-for="Email" class="text-danger"></span>
 
             <input asp-for="Password" type="password" placeholder="Enter your password">
             <span class="validation" asp-validation-for="Password"></span>
+            <span asp-validation-for="Password" class="text-danger"></span>
+
 
             <button type="submit">Login</button>
         </form>

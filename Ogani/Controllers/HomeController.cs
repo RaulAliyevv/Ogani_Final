@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Ogani.Business.Dtos;
 using Ogani.Business.Dtos.Subscribes;
 using Ogani.Business.UIService.Abstracts;
 using Ogani.Models;
@@ -35,15 +37,24 @@ namespace Ogani.Controllers
         }
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(string? json)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (!string.IsNullOrEmpty(json))
+            {
+
+                string decodedJson = Uri.UnescapeDataString(json);
+
+                var dto = JsonConvert.DeserializeObject<ErrorDto>(decodedJson);
+                return View(dto);
+            }
+
+            return View(new ErrorDto
+            {
+                StatusCode = 404,
+                Message = "Error"
+            });
         }
 
-        public async Task<IActionResult> Shop()
-        {
-            return View();
-        }
+     
     }
 }

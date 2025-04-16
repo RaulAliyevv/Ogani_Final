@@ -16,6 +16,8 @@
                                aria-label="Username"
                                aria-describedby="basic-addon11" />
                     </div>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+
 
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon11"></span>
@@ -26,6 +28,8 @@
                                aria-label="Description"
                                aria-describedby="basic-addon11" />
                     </div>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+
 
                     <div class="mb-3 row">
                         <label for="html5-number-input" class="col-md-2 col-form-label">Price</label>
@@ -34,6 +38,7 @@
                         </div>
                     </div>
 
+                    <span asp-validation-for="Price" class="text-danger"></span>
 
 
                     <div class="form-group">
@@ -42,12 +47,15 @@
                             <option value="">Kateqoriya seçin</option>
                         </select>
                     </div>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+
 
                     <img src="@Model.ImageMain" width="150px" />
                     <div class="input-group">
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>
                         <input asp-for="MainImageUrl" type="file" class="form-control" id="inputGroupFile01" />
                     </div>
+                    <span asp-validation-for="MainImageUrl" class="text-danger"></span>
 
                     @foreach (var img in Model.imgUrl)
                     {
@@ -58,6 +66,8 @@
                         <label class="input-group-text" for="inputGroupFile01">Upload</label>
                         <input asp-for="ProductImages" type="file" class="form-control" id="inputGroupFile01" multiple />
                     </div>
+                    <span asp-validation-for="ProductImages" class="text-danger"></span>
+
 
 
                 </div>
@@ -66,5 +76,5 @@
 
     </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>

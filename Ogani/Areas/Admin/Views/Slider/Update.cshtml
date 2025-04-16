@@ -20,6 +20,8 @@
                                placeholder="Slider Name"
                                aria-label="Slider Name" />
                     </div>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+
 
                     <!-- Mövcud Şəkil -->
                     <img src="@Model.ImgUrlPicture" width="150px" alt="Slider Image" class="mt-2" />
@@ -29,6 +31,7 @@
                         <label class="input-group-text" for="inputGroupFile01">Upload New Image</label>
                         <input asp-for="ImgUrl" type="file" class="form-control" id="inputGroupFile01" />
                     </div>
+                    <span asp-validation-for="ImgUrl" class="text-danger"></span>
 
                     <!-- Green Write -->
                     <div class="input-group mt-3">
@@ -39,6 +42,8 @@
                                placeholder="Green Write"
                                aria-label="Green Write" />
                     </div>
+                    <span asp-validation-for="GreenWrite" class="text-danger"></span>
+
 
                     <!-- Bold Write -->
                     <div class="input-group mt-3">
@@ -49,6 +54,7 @@
                                placeholder="Bold Write"
                                aria-label="Bold Write" />
                     </div>
+                    <span asp-validation-for="BoldWrite" class="text-danger"></span>
 
                     <!-- Light Write -->
                     <div class="input-group mt-3">
@@ -59,6 +65,8 @@
                                placeholder="Light Write"
                                aria-label="Light Write" />
                     </div>
+                    <span asp-validation-for="LightWrite" class="text-danger"></span>
+
 
                     <!-- Button Write -->
                     <div class="input-group mt-3">
@@ -69,6 +77,8 @@
                                placeholder="Button Write"
                                aria-label="Button Write" />
                     </div>
+                    <span asp-validation-for="ButtonWrite" class="text-danger"></span>
+
 
                 </div>
             </div>

@@ -26,6 +26,8 @@
                     <label asp-for="SelectedRole" class="form-label fw-bold">New Role:</label>
                     <select asp-for="SelectedRole" asp-items="@(new SelectList(Model.AllRoles))" class="form-select"></select>
                 </div>
+                <span asp-validation-for="SelectedRole" class="text-danger"></span>
+
 
                 <button type="submit" class="btn btn-success">Change</button>
                 <a asp-action="Index" class="btn btn-secondary ms-2">Back</a>

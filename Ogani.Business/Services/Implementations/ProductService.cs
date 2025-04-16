@@ -111,7 +111,12 @@ public class ProductService : CrudService<Product, ProductCreateDto, ProductUpda
         {
             errors.Add("Category must be a valid ID.");
         }
-
+        var category = await _categoryService.GetAsync(dto.CategoryId);
+        if (category == null)
+        {
+            errors.Add("Category must be a valid ID.");
+        }
+      
         if (dto.MainImageUrl == null)
         {
             errors.Add("main image is required");
