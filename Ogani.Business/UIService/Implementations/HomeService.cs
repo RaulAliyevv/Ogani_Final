@@ -19,16 +19,18 @@ internal class HomeService : IHomeService
     private readonly ICategoryService _categoryService;
     private readonly ISliderService _sliderService;
     private readonly ISubscribeService _subscribeService;
-   private readonly IBlogService _blogService;
+    private readonly IBlogService _blogService;
+    private readonly ISliderRightLeftService _sliderRightLeftService;
 
 
-    public HomeService(IProductService productService, ICategoryService categoryService, ISliderService sliderService, ISubscribeService subscribeService, IBlogService blogService)
+    public HomeService(IProductService productService, ICategoryService categoryService, ISliderService sliderService, ISubscribeService subscribeService, IBlogService blogService, ISliderRightLeftService sliderRightLeftService)
     {
         _productService = productService;
         _categoryService = categoryService;
         _sliderService = sliderService;
         _subscribeService = subscribeService;
         _blogService = blogService;
+        _sliderRightLeftService = sliderRightLeftService;
     }
 
     public async Task<HomeDto> GetHomeViewModelAsync()
@@ -70,14 +72,15 @@ internal class HomeService : IHomeService
             .OrderByDescending(b => b.CreatedTime)
             .Take(6)
             .ToList();
-
+        var sliderLeftRight = await _sliderRightLeftService.GetAllAsync();
 
         return new HomeDto
         {
             Categories = categories,
             Products = productDtos,
-            SliderDto =slider,
+            SliderDto = slider,
             BlogDtos = latestBlogs
+            ,sliderRightLefts = sliderLeftRight
         };
     }
 
@@ -87,9 +90,9 @@ internal class HomeService : IHomeService
     {
         var slider = await _sliderService.GetAllAsync();
 
-        var product = await _productService.GetAsync(x=>x.Id==id ,include : x=>x.Include(x=>x.Category) .Include(c=>c.ProductImages));
+        var product = await _productService.GetAsync(x => x.Id == id, include: x => x.Include(x => x.Category).Include(c => c.ProductImages));
 
-        if( product is null) throw new NotFoundException();
+        if (product is null) throw new NotFoundException();
 
 
 
@@ -97,14 +100,14 @@ internal class HomeService : IHomeService
           x.CategoryId == product.CategoryId && x.Id != id);
 
 
-      
+
 
 
         var model = new DetailDto
         {
-            Id=id,
+            Id = id,
             Product = product,
-            SliderDto=slider,
+            SliderDto = slider,
             RelatedProducts = relatedProducts
         };
 
@@ -113,7 +116,7 @@ internal class HomeService : IHomeService
 
     public async Task<bool> CreateSubcribeAsync(SubscribeCreateDto dto)
     {
-        if(dto is null) return false;
+        if (dto is null) return false;
 
         var model = await _subscribeService.CreateAsync(dto);
 

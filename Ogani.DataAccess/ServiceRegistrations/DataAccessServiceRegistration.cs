@@ -49,6 +49,8 @@ namespace Ogani.DataAccess.ServiceRegistrations
 
             services.AddScoped<IContactRepository, ContactRepository>();
 
+            services.AddScoped<ISliderRightLeftRepository, SliderRightLeftRepository>();
+
             services.AddScoped<BaseAuditableInterceptor>();
 
         }

@@ -5,11 +5,11 @@ namespace Ogani.Business.Dtos.AccountDtos;
 public class ResetPasswordDto
 {
     [Required]
-    public string Token { get; set; } = null!;
+    public string? Token { get; set; } 
 
     [Required]
     [EmailAddress]
-    public string Email { get; set; } = null!;
+    public string? Email { get; set; } = null!;
 
     [Required]
     [StringLength(100, MinimumLength = 6)]

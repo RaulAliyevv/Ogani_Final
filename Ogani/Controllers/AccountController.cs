@@ -139,7 +139,7 @@ public class AccountController : Controller
         if (!ModelState.IsValid)
             return View(resetPasswordDto);
 
-        var user = await _accountService.FindUser();
+        var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
 
         var result = await _accountService.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.NewPassword);
         if (!result.Succeeded)

@@ -47,6 +47,8 @@ public static class BusinessLogicLayerServiceRegistration
 
         services.AddScoped<IContactService, ContactService>();
 
+        services.AddScoped<ISliderRightLeftService, SliderRightLeftService>();
+
 
 
         return services;

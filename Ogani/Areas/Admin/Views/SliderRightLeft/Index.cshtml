@@ -1,0 +1,36 @@
+﻿@using Ogani.Business.Dtos.SliderRightLeftDtos
+@model List<SliderRightLeftDto>
+
+<div class="card">
+    <h5 class="card-header">Slider Left and Right</h5>
+    <div class="table-responsive text-nowrap">
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>LeftImage</th>
+                    <th>RightImage</th>
+                    <th>Update</th>
+
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var slider in Model)
+                {
+                    <tr>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@slider.LeftImage</strong></td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@slider.RightImage</strong></td>
+                        <td>
+                            <a asp-action="Update" asp-controller="SliderRihgtLeft" class="badge bg-label-primary me-1">
+                                Update
+                            </a>
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
