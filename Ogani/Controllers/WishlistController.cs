@@ -32,11 +32,11 @@ namespace Ogani.Controllers
             var count = await _wishlistService.WishlistCount();
             return Json(new { count = count });
         }
-        [HttpDelete]
+    
         public async Task<IActionResult> Delete(int id)
         {
             await _wishlistService.AddToWishListAsync(id);
-            return Ok();
+            return RedirectToAction("index");
         }
 
     }

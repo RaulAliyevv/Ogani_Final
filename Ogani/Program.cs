@@ -23,7 +23,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     //options.SignIn.RequireConfirmedEmail = true;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 var app = builder.Build();
-//app.UseMiddleware<GlobalExceptionHandler>();
+app.UseMiddleware<GlobalExceptionHandler>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
